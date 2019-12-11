@@ -172,6 +172,13 @@ post {
     always {
         echo 'I will always say Hello again!'
         sh label: 'helloworld', script: 'env'
+        script {
+          def fields = env.getEnvironment()
+          fields.each {
+            key, value -> println("${key} = ${value}");
+          }
+          println(env.PATH)
+        }
         sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
         {
           "result": env.RESULT,
