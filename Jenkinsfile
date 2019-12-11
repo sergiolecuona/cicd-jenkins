@@ -171,17 +171,17 @@ stages {
 post {
     always {
         echo 'I will always say Hello again!'
+        sh label: 'helloworld', script: 'env'
         script {
           sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
           {
-            "result": ${env.RESULT},
+            "result": ${RESULT},
             "stageError": '${stageERROR}',
             "buildCauses": '${currentBuild.getBuildCauses()}',
             "timeInMillis": '${currentBuild.timeInMillis}',
             "startTimeInMillis": '${currentBuild.startTimeInMillis}'
           }
-          \'EOF\'
-          '''
+          EOF'''
         }
         sh label: 'helloworld', script: 'cat json.json'
     }
