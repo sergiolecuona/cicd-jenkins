@@ -172,11 +172,16 @@ post {
     always {
         echo 'I will always say Hello again!'
         script {
+          def readContent = readFile 'json.json'
+          writeFile file: 'json.json', text: readContent+"\r\{"
           def fields = env.getEnvironment()
           fields.each {
-            key, value -> println("${key} = ${value}");
+            key, value -> writeFile file: 'json.json', text: readContent+"\r\${key} : ${value},"
           }
+          writeFile file: 'json.json', text: readContent+"\r\}"
         }
+
+        writeFile file: 'build.sbt', text: readContent+"\r\nversion := 1.0.${env.BUILD_ID}"
         sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
         {
           "result": ${env.RESULT},
