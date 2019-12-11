@@ -172,26 +172,16 @@ post {
     always {
         echo 'I will always say Hello again!'
         script {
-          def readContent = readFile 'json.json'
-          writeFile file: 'json.json', text: readContent+"\r\n{"
-          def fields = env.getEnvironment()
-          fields.each {
-            key, value -> writeFile file: 'json.json', text: readContent+"\r\n${key} : ${value},"
+          sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
+          {
+            "result": ${env.RESULT},
+            "stageError": '${stageERROR}',
+            "buildCauses": '${currentBuild.getBuildCauses()}',
+            "timeInMillis": '${currentBuild.timeInMillis}',
+            "startTimeInMillis": '${currentBuild.startTimeInMillis}'
           }
-          def readContent_final = readFile 'json.json'
-          writeFile file: 'json.json', text: readContent_final+"\r\n}"
+          EOF'''
         }
-
-        writeFile file: 'build.sbt', text: readContent+"\r\nversion := 1.0.${env.BUILD_ID}"
-        sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
-        {
-          "result": ${env.RESULT},
-          "stageError": '${stageERROR}',
-          "buildCauses": '${currentBuild.getBuildCauses()}',
-          "timeInMillis": '${currentBuild.timeInMillis}',
-          "startTimeInMillis": '${currentBuild.startTimeInMillis}'
-        }
-        EOF'''
         sh label: 'helloworld', script: 'cat json.json'
     }
 }
