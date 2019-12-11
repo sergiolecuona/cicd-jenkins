@@ -175,6 +175,7 @@ post {
         script {
           sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
           {
+            "buildNumber": ${BUILD_NUMBER},
             "result": ${RESULT},
             "stageError": '${stageERROR}',
             "buildCauses": '${currentBuild.getBuildCauses()}',
