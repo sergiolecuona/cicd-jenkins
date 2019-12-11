@@ -179,9 +179,8 @@ def randomResult = new java.util.Random().nextInt(35)
               "timeInMillis": '${currentBuild.timeInMillis}',
               "startTimeInMillis": '${currentBuild.startTimeInMillis}'
             }
-            EOF' ''
-            sh label: 'helloworld',
-            script: 'cat json.json'
+            EOF'''
+            sh label: 'helloworld', script: 'cat json.json'
         }
     }
 }
