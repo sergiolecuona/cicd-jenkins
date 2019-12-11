@@ -185,6 +185,7 @@ post {
           EOF'''
         }
         sh label: 'helloworld', script: 'cat json.json'
+        sh label: 'helloworld', script: 'aws s3 cp json.json s3://jenkins-agile'
     }
 }
 }
