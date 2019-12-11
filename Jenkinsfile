@@ -178,7 +178,7 @@ post {
           fields.each {
             key, value -> writeFile file: 'json.json', text: readContent+"\r\n${key} : ${value},"
           }
-          def readContent = readFile 'json.json'
+          readContent = readFile 'json.json'
           writeFile file: 'json.json', text: readContent+"\r\n}"
         }
 
