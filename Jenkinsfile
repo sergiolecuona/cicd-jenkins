@@ -176,7 +176,6 @@ post {
           writeFile file: 'json.json', text: readContent+"\r\n{"
           def fields = env.getEnvironment()
           fields.each {
-            def readContent = readFile 'json.json'
             key, value -> writeFile file: 'json.json', text: readContent+"\r\n${key} : ${value},"
           }
           def readContent = readFile 'json.json'
