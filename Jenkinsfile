@@ -180,7 +180,8 @@ post {
             "timeInMillis": '${currentBuild.timeInMillis}',
             "startTimeInMillis": '${currentBuild.startTimeInMillis}'
           }
-          EOF'''
+          \'EOF\'
+          '''
         }
         sh label: 'helloworld', script: 'cat json.json'
     }
