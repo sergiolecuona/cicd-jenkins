@@ -171,7 +171,7 @@ stages {
 post {
     always {
         echo 'I will always say Hello again!'
-        echo env
+        env
         sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
         {
           "result": '${env.RESULT}',
