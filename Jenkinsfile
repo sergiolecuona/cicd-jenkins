@@ -178,8 +178,8 @@ post {
           fields.each {
             key, value -> writeFile file: 'json.json', text: readContent+"\r\n${key} : ${value},"
           }
-          readContent = readFile 'json.json'
-          writeFile file: 'json.json', text: readContent+"\r\n}"
+          def readContent_final = readFile 'json.json'
+          writeFile file: 'json.json', text: readContent_final+"\r\n}"
         }
 
         writeFile file: 'build.sbt', text: readContent+"\r\nversion := 1.0.${env.BUILD_ID}"
