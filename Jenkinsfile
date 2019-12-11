@@ -171,8 +171,7 @@ def randomResult = new java.util.Random().nextInt(35)
     post {
         always {
             echo 'I will always say Hello again!'
-            sh label: 'helloworld',
-            script: '' 'cat << \'EOF\' > json.json
+            sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
             {
               "result": '${env.RESULT}',
               "stageError": '${stageERROR}',
