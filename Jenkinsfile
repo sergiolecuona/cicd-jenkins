@@ -171,7 +171,6 @@ stages {
 post {
     always {
         echo 'I will always say Hello again!'
-        sh label: 'helloworld', script: 'env'
         script {
           def fields = env.getEnvironment()
           fields.each {
