@@ -176,11 +176,10 @@ post {
           fields.each {
             key, value -> println("${key} = ${value}");
           }
-          println(env.PATH)
         }
         sh label: 'helloworld', script: '''cat << \'EOF\' > json.json
         {
-          "result": !env.RESULT,
+          "result": ${env.RESULT},
           "stageError": '${stageERROR}',
           "buildCauses": '${currentBuild.getBuildCauses()}',
           "timeInMillis": '${currentBuild.timeInMillis}',
