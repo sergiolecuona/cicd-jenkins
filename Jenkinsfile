@@ -9,6 +9,7 @@ agent any
 stages {
     stage('Build') {
         steps {
+            jsonName = !env.JOB_BASE_NAME
             echo "branch name: $BRANCH_NAME"
             echo jsonName
             script {
@@ -176,7 +177,6 @@ post {
         echo jsonName
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
-        jsonName = !env.JOB_BASE_NAME
         script {
           sh label: 'Creating JSON File', script: '''cat << \'EOF\' > ${env.jsonName}
           {
