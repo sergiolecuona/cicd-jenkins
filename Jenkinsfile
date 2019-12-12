@@ -2,7 +2,7 @@ def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
 def stageERROR = ''
 def s3BucketName = 'jenkins-agile'
-def jsonName = ''
+def jsonName
 
 pipeline {
 agent any
@@ -11,7 +11,7 @@ stages {
         steps {
             echo "branch name: $BRANCH_NAME"
             script {
-                jsonName = ${env.JOB_BASE_NAME}
+                jsonName = ${JOB_BASE_NAME}
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
@@ -174,7 +174,7 @@ stages {
 }
 post {
     always {
-        echo 'jsonName = '+jsonName
+        echo 'jsonName ${jsonName}'
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
