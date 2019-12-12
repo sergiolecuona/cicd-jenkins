@@ -20,7 +20,6 @@ stages {
                             stageERROR = 'Build'
                     }
             }
-            echo 'jsonName: '+jsonName
             script {
                 if (analysisStatus == 'KO') {
                     error 'error in Build'
