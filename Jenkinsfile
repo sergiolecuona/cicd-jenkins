@@ -10,6 +10,7 @@ stages {
     stage('Build') {
         steps {
             echo "branch name: $BRANCH_NAME"
+            echo jsonName
             script {
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
@@ -175,7 +176,7 @@ post {
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
-          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > ${env.jsonName}
+          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > "${env.jsonName}"
           {
             "buildNumber": !env.BUILD_NUMBER,
             "result": ${RESULT},
