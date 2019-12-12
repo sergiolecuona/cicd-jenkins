@@ -173,7 +173,7 @@ post {
         echo 'I will always say Hello again!'
         sh label: 'helloworld', script: 'env'
         script {
-          sh label: 'helloworld', script: '''cat << \'EOF\' > ${env.JOB_BASEN_NAME}-${env.BUILD_ID}.json
+          sh label: 'helloworld', script: '''cat << \'EOF\' > ${env.JOB_BASE_NAME}-${env.BUILD_ID}.json
           {
             "buildNumber": !env.BUILD_NUMBER,
             "result": ${RESULT},
