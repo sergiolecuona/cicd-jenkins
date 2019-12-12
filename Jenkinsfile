@@ -178,7 +178,7 @@ post {
         echo 'Lets save some results'
         sh label: 'print env variables', script: 'env'
         script {
-          json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${currentBuild.result}", stageError: "${stageERROR}", gitCommit: "${GIT_COMMIT}", duration: "${currentBuild.duration.toString()}"])
+          json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${currentBuild.result}", stageError: "${stageERROR}", gitCommit: "${GIT_COMMIT}", duration: "${currentBuild.getDurationString()}", startTime: "${currentBuild.startTimeInMillis}"])
           new File("/tmp/${jsonName}").write(json)
         }
         sh label: 'print generated json file', script: "cat /tmp/${jsonName}"
