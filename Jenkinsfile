@@ -10,15 +10,15 @@ stages {
     stage('Build') {
         steps {
             echo "branch name: $BRANCH_NAME"
-            echo jsonName
             script {
-                jsonName = !env.JOB_BASE_NAME
+                jsonName = !env.JOB_BASE_NAM
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
                             stageERROR = 'Build'
                     }
             }
+            echo 'jsonName: '+jsonName
             script {
                 if (analysisStatus == 'KO') {
                     error 'error in Build'
