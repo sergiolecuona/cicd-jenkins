@@ -187,7 +187,7 @@ post {
           EOF'''
         }
         sh label: 'print generated json file', script: 'cat ${env.jsonName}'
-        sh label: 'copy generated json file to s3', script: "aws s3 cp ${env.jsonName} s3://${s3BucketName}""
+        sh label: 'copy generated json file to s3', script: "aws s3 cp ${env.jsonName} s3://${s3BucketName}"
     }
 }
 }
