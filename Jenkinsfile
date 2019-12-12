@@ -2,7 +2,7 @@ def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
 def stageERROR = ''
 def s3BucketName = 'jenkins-agile'
-def jsonName
+def jsonName = "${JOB_BASE_NAME}"
 
 pipeline {
 agent any
@@ -11,7 +11,6 @@ stages {
         steps {
             echo "branch name: $BRANCH_NAME"
             script {
-                jsonName = "${JOB_BASE_NAME}"
                 echo "${jsonName}"
                 echo "JOB NAME is ${JOB_BASE_NAME}"
                 echo "==="
