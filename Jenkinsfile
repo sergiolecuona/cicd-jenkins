@@ -11,7 +11,6 @@ stages {
         steps {
             echo "branch name: $BRANCH_NAME"
             script {
-                echo "${jsonName}"
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
@@ -173,11 +172,10 @@ stages {
 }
 post {
     always {
-        echo 'jsonName ${jsonName}'
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
-          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > ${jsonName}
+          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > "${jsonName}"
           {
             "buildNumber": !env.BUILD_NUMBER,
             "result": ${RESULT},
@@ -189,7 +187,7 @@ post {
           EOF'''
         }
         sh label: 'print generated json file', script: 'cat ${env.jsonName}'
-        sh label: 'copy generated json file to s3', script: 'aws s3 cp ${env.jsonName} s3://${env.s3BucketName}'
+        sh label: 'copy generated json file to s3', script: "aws s3 cp ${env.jsonName} s3://${s3BucketName}""
     }
 }
 }
