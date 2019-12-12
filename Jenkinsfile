@@ -1,3 +1,5 @@
+import groovy.json.JsonOutput;
+
 def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
 def stageERROR = ''
