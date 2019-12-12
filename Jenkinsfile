@@ -1,6 +1,8 @@
 def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
 def stageERROR = ''
+def s3BuckentName = 'jenkins-agile'
+def jsonName = '!env.JOB_BASE_NAME-!env.BUILD_ID.json'
 
 pipeline {
 agent any
@@ -171,9 +173,9 @@ stages {
 post {
     always {
         echo 'I will always say Hello again!'
-        sh label: 'helloworld', script: 'env'
+        sh label: 'print env variables', script: 'env'
         script {
-          sh label: 'helloworld', script: '''cat << \'EOF\' > ${env.JOB_BASE_NAME}-${env.BUILD_ID}.json
+          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > jsonName
           {
             "buildNumber": !env.BUILD_NUMBER,
             "result": ${RESULT},
@@ -184,8 +186,8 @@ post {
           }
           EOF'''
         }
-        sh label: 'helloworld', script: 'cat json.json'
-        sh label: 'helloworld', script: 'aws s3 cp json.json s3://jenkins-agile'
+        sh label: 'print generated json file', script: 'cat jsonName'
+        sh label: 'copy generated json file to s3', script: 'aws s3 cp json.json s3://s3BuckentName'
     }
 }
 }
