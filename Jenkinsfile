@@ -11,7 +11,7 @@ stages {
         steps {
             echo "branch name: $BRANCH_NAME"
             script {
-                jsonName = !env.JOB_BASE_NAM
+                jsonName = ${env.JOB_BASE_NAME}
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
