@@ -12,6 +12,8 @@ stages {
             echo "branch name: $BRANCH_NAME"
             script {
                 jsonName = ${JOB_BASE_NAME}
+                echo ${jsonName}
+                echo "==="
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
@@ -178,7 +180,7 @@ post {
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
-          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > ${env.jsonName}
+          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > ${jsonName}
           {
             "buildNumber": !env.BUILD_NUMBER,
             "result": ${RESULT},
