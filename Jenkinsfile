@@ -174,7 +174,7 @@ stages {
 }
 post {
     always {
-        echo jsonName
+        echo 'jsonName = '+jsonName
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
