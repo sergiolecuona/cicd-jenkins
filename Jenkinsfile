@@ -178,7 +178,7 @@ post {
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
         script {
-          json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${env.RESULT}", stageError: "${stageERROR}"])
+          json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${currentBuild.result}", stageError: "${stageERROR}", gitCommit: "${GIT_COMMIT}"])
           new File("/tmp/${jsonName}").write(json)
         }
         sh label: 'print generated json file', script: "cat /tmp/${jsonName}"
