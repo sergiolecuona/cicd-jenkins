@@ -179,10 +179,10 @@ post {
         sh label: 'print env variables', script: 'env'
         script {
           json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${env.RESULT}", stageError: "${stageERROR}"])
-          new File("./${jsonName}").write(json)
+          new File("/tmp/${jsonName}").write(json)
         }
-        sh label: 'print generated json file', script: "cat ${jsonName}"
-        sh label: 'copy generated json file to s3', script: "aws s3 cp ${jsonName} s3://${s3BucketName}"
+        sh label: 'print generated json file', script: "cat /tmp/${jsonName}"
+        sh label: 'copy generated json file to s3', script: "aws s3 cp /tmp/${jsonName} s3://${s3BucketName}"
     }
 }
 }
