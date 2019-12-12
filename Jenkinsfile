@@ -9,10 +9,10 @@ agent any
 stages {
     stage('Build') {
         steps {
-            jsonName = !env.JOB_BASE_NAME
             echo "branch name: $BRANCH_NAME"
             echo jsonName
             script {
+                jsonName = !env.JOB_BASE_NAME
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
