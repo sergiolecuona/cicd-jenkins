@@ -175,10 +175,16 @@ stages {
 }
 post {
     always {
-        echo 'I will always say Hello again!'
+        echo 'Lets save some results'
         sh label: 'print env variables', script: 'env'
         script {
-          json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${currentBuild.result}", stageError: "${stageERROR}", gitCommit: "${GIT_COMMIT}"])
+          json = JsonOutput.toJson(['''\
+            buildNumber: "${BUILD_NUMBER}",
+            result: "${currentBuild.result}",
+            stageError: "${stageERROR}",
+            gitCommit: "${GIT_COMMIT}"
+            '''
+          ])
           new File("/tmp/${jsonName}").write(json)
         }
         sh label: 'print generated json file', script: "cat /tmp/${jsonName}"
