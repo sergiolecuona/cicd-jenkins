@@ -174,19 +174,9 @@ post {
     always {
         echo 'I will always say Hello again!'
         sh label: 'print env variables', script: 'env'
-        script {
-          sh label: 'Creating JSON File', script: '''cat << \'EOF\' > "${jsonName}"
-          {
-            "buildNumber": !env.BUILD_NUMBER,
-            "result": ${RESULT},
-            "stageError": '${stageERROR}',
-            "buildCauses": '${currentBuild.getBuildCauses()}',
-            "timeInMillis": '${currentBuild.timeInMillis}',
-            "startTimeInMillis": '${currentBuild.startTimeInMillis}'
-          }
-          EOF'''
-        }
-        sh label: 'print generated json file', script: 'cat ${env.jsonName}'
+        def json = JsonOutput.toJson([buildNumber: "${BUILD_NUMBER}", result: "${RESULT}", stageError: "${stageERROR}"])
+        new File("./${jsonName}").write(json)
+        sh label: 'print generated json file', script: "cat ${jsonName}"
         sh label: 'copy generated json file to s3', script: "aws s3 cp ${env.jsonName} s3://${s3BucketName}"
     }
 }
