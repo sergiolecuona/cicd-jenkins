@@ -11,8 +11,9 @@ stages {
         steps {
             echo "branch name: $BRANCH_NAME"
             script {
-                jsonName = ${JOB_BASE_NAME}
-                echo ${jsonName}
+                jsonName = "${JOB_BASE_NAME}"
+                echo "${jsonName}"
+                echo "JOB NAME is ${JOB_BASE_NAME}"
                 echo "==="
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
