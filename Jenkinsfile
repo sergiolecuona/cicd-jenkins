@@ -2,7 +2,7 @@ def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
 def stageERROR = ''
 def s3BucketName = 'jenkins-agile'
-def jsonName = ${JOB_BASE_NAME}${BUILD_ID}+'.json'
+def jsonName = ${JOB_BASE_NAME}${BUILD_ID}'.json'
 
 pipeline {
 agent any
