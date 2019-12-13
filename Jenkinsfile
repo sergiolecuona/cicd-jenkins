@@ -17,7 +17,7 @@ stages {
     stage('Build') {
         steps {
             script {
-                echo $BRANCH_NAME
+                echo "${BRANCH_NAME}"
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
