@@ -9,7 +9,9 @@ def json
 
 pipeline {
 agent any
-options([parameters([credentials(credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', description: '', name: 'AWS Credentials', required: true)])])
+parameters {
+  credentials(credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', description: '', name: 'AWS Credentials', required: true)])
+}
 stages {
     stage('Build') {
         steps {
