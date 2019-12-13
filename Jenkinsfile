@@ -13,7 +13,6 @@ properties([parameters([credentials(credentialType: 'com.cloudbees.jenkins.plugi
 stages {
     stage('Build') {
         steps {
-            echo "branch name: $BRANCH_NAME"
             script {
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
