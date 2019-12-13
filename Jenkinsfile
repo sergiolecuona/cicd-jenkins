@@ -11,11 +11,13 @@ pipeline {
 agent any
 parameters {
   credentials(credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', description: '', name: 'AWS Credentials', required: true)
+  string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Branch Name')
 }
 stages {
     stage('Build') {
         steps {
             script {
+                echo $BRANCH_NAME
                 analysisStatus = 'OK'
                     if (randomResult == 11) {
                         analysisStatus = 'KO'
