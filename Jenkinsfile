@@ -2,7 +2,7 @@ import groovy.json.JsonOutput;
 
 def randomResult = new java.util.Random().nextInt(35)
 def analysisStatus = 'OK'
-def stageERROR = ''
+def stageERROR = 'OK'
 def s3BucketName = 'jenkins-agile'
 def jsonName = "${JOB_BASE_NAME}-${BUILD_ID}.json"
 def json
